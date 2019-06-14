@@ -1,0 +1,101 @@
+#include <cs50.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+int shift(char c);
+
+
+int main(int argc, string argv[])
+{
+    string S = argv[1];
+    // make argv[1] into a string I can work with and get the length of.
+
+    
+    
+    // If the user doesn't enter eactly one command line argument, they will recive an error messages intrusting them how to use the porgram correctly
+    // return 1 to indicate something has gone wrong with program and kill it.
+    if (argc != 2)    
+    {
+        printf("Usage: ./vigenere keyword\n");
+        return 1;
+    }    
+    // make argv[1] into a string I can work with and get the length of.
+    //get string length of the first argument 
+    int LEN = strlen(S);
+    // iterate over the string length of arument vector 1
+    for (int i = 0; i < LEN; i++)
+    {
+        
+        if (isalpha(S[i]))
+        {
+                 
+        }
+    
+        else 
+            // if any character in argument vector 1 is not a letter, the loop prints how to use the program correctly and then terminates itself.
+        {
+            printf("Usage: ./vigenere keyword\n");
+            return 1;
+        }
+              
+    }
+    
+        
+    //Prompt user for text they want encoded 
+    string plaintext = get_string("plaintext:  ");    
+    // get length of plaintext for use in loop
+    int promtlen = strlen(plaintext);
+
+    printf("ciphertext: ");
+    
+    
+    int k[LEN] = shift(argv[1][LEN]);
+
+    for (int i = 0, index = 0; i <= promtlen - 1; i++)
+    {
+        if isalpha(plaintext[i])
+        {    
+            if islower(plaintext[i])
+            {
+                printf("%c", (plaintext[i] - 'a' + k[index]) % 26 + 'a');           
+            }
+                     
+            
+            else if isupper(plaintext[i])
+
+            {
+                printf("%c", (plaintext[i] - 'A' + k[index]) % 26 + 'A');
+            }
+           
+            else
+              
+            {     
+                printf("%c", plaintext[i]);  
+            }  
+            index = index + 1 % LEN;
+        }    
+    }    
+    printf("\n");
+    
+    
+    
+   
+    
+}    
+// shift function takes a character as it's input, according to whether it is upper or lower case it will take away the asci value of A or a to get the shift value for the cipher
+int shift(char c)
+{
+    if islower(c)
+    {
+        return c - 97;  
+    }
+    else if isupper(c)
+    {
+        return c - 65;
+    }    
+    else
+    {
+        return c;            
+    }    
+}   
